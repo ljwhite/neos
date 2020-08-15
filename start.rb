@@ -6,7 +6,8 @@ puts "Please enter a date in the following format YYYY-MM-DD."
 print ">>"
 
 date = gets.chomp
-astroid_details = NearEarthObjects.find_neos_by_date(date)
+# astroid_details = NearEarthObjects.find_neos_by_date(date)
+astroid_details = NearEarthObjects.call(date)
 astroid_list = astroid_details[:astroid_list]
 total_number_of_astroids = astroid_details[:total_number_of_astroids]
 largest_astroid = astroid_details[:biggest_astroid]
@@ -17,7 +18,6 @@ column_data = column_labels.each_with_object({}) do |(col, label), hash|
     label: label,
     width: [astroid_list.map { |astroid| astroid[col].size }.max, label.size].max}
 end
-
 header = "| #{ column_data.map { |_,col| col[:label].ljust(col[:width]) }.join(' | ') } |"
 divider = "+-#{column_data.map { |_,col| "-"*col[:width] }.join('-+-') }-+"
 
